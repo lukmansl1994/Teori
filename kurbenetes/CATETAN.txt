@@ -127,6 +127,7 @@ Removing intermediate container eeb2f526a105
  ---> f024036ff2a4
 Successfully built f024036ff2a4
 Successfully tagged lukmansl1994/imageuas:v1
+
 $ docker images
 REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
 lukmansl1994/imageuas                           v1                  f024036ff2a4        15 seconds ago      903MB
@@ -167,9 +168,11 @@ gcr.io/google-samples/kubernetes-bootcamp       v1                  8fafd8af70e9
 gcr.io/google_containers/echoserver             1.4                 a90209bb39e3        3 years ago         140MB
 gcr.io/google-samples/gb-frontend               v3                  c038466384ab        4 years ago         510MB
 gcr.io/google_samples/gb-redisslave             v1                  5f026ddffa27        4 years ago         109MB
+
 $ docker images | grep luk
 lukmansl1994/imageuas                           v1                  f024036ff2a4        24 seconds ago      903MB
 lukmansl1994/python-flask                       v1                  37c59c1d3ea1        9 days ago          199MB
+
 $ docker push lukmansl1994/imageuas:v1
 The push refers to repository [docker.io/lukmansl1994/imageuas]
 b58f565dd38f: Preparing
@@ -184,27 +187,35 @@ b52c1c103fae: Mounted from library/python
 6f1c84e6ec59: Mounted from library/python
 dd5242c2dc8a: Mounted from library/python
 v1: digest: sha256:311ded07dc4d65d8c7e638a56b851906f1d1070bad82a489882cf846d81c70c9 size: 2639
+
 $ kubectl create deployment luk-flask --image=lukmansl1994/imageuas:v1
+
 deployment.apps/luk-flask created
 $ kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 luk-flask-7d7766557f-t5d6d      1/1     Running   0          11s
 python-flask-6fcd775d57-7ntgc   1/1     Running   0          13m
+
 $ kubectl get services
 NAME           TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
 kubernetes     ClusterIP      10.96.0.1     <none>        443/TCP          14m
 python-flask   LoadBalancer   10.96.2.161   <pending>     5000:32604/TCP   12m
+
 $ kubectl delete deployment python-flask
 deployment.apps "python-flask" deleted
+
 $ kubectl get services
 NAME           TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
 kubernetes     ClusterIP      10.96.0.1     <none>        443/TCP          14m
 python-flask   LoadBalancer   10.96.2.161   <pending>     5000:32604/TCP   12m
+
 $ kubectl delete service python-flask
 service "python-flask" deleted
+
 $ kubectl get services
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   15m
+
 $ kubectl get pods
 NAME                         READY   STATUS    RESTARTS   AGE
 luk-flask-7d7766557f-t5d6d   1/1     Running   0          93s
@@ -216,8 +227,10 @@ $ history  | grep service
    23  kubectl delete service python-flask
    24  kubectl get services
    26  history  | grep service
+
 $ kubectl expose deployment luk-flask --type=LoadBalancer --port=5000
 service/luk-flask exposed
+
 $ kubectl get services
 NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          16m

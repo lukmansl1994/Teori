@@ -29,7 +29,7 @@ Secara logis, setiap kontroler adalah sebuah proses yang berbeda, tetapi untuk m
 * Kontroler Endpoints : Menginisiasi objek Endpoints (yang merupakan gabungan Pods dan Services).
 * Kontroler Service Account & Token: Membuat akun dan akses token API standar untuk setiap namespaces yang dibuat.
 
-# Membuat sebuah Deployment menggunakan Python
+# Membuat sebuah Deployment menggunakan Python dan Flask.  
 
 1. Membuat Docker images terlebih dahulu`lukmansl1994/imageuas:v1`
 <pre>
@@ -39,7 +39,7 @@ REPOSITORY                   TAG                   IMAGE ID            CREATED
            SIZE
 docker.test                  latest                37c59c1d3ea1        9 days ag
 o          199MB
-lukmansl1994/python-flask    v1                    37c59c1d3ea1        9 days ag
+lukmansl1994/imageuas    v1                    37c59c1d3ea1        9 days ag
 </pre>  
 2. Install kubectl terlebih dahulu sesuai URL berikut `https://kubernetes.io/docs/tutorials/hello-minikube/`.  
 <pre>
@@ -62,8 +62,8 @@ commit: 54f28ac5d3a815d1196cd5d57d707439ee4bb392
 * dashboard was successfully enabled
 Kubernetes Started
 </pre>  
-3. Gunakan perintah kubectl create untuk membuat Deployment. Pod menjalankan Container berdasarkan image docker yang digunakan. Disini saya menggunakan image docker `lukmansl1994/python-flask:v1`. Pada Deployment ini Pod hanya memiliki 1 Container saja. `kubectl create deployment python-flask --image=lukmansl1994/python-flask:v1` .  
-<pre>deployment.apps/python-flask created</pre>    
+3. Gunakan perintah kubectl create untuk membuat Deployment. Pod menjalankan Container berdasarkan image docker yang digunakan. Disini saya menggunakan image docker `lukmansl1994/imageuas:v1`. Pada Deployment ini Pod hanya memiliki 1 Container saja. `kubectl create deployment luk-flask --image=lukmansl1994/imageuas:v1` .  
+<pre>deployment.apps/luk-flask created</pre>    
 4. Melihat Deployment yang telah dibuat `kubectl get deployments`    
 <pre>
 $ kubectl get deployments
@@ -110,7 +110,7 @@ $
 1. Jalankan Pod pada internet publik menggunakan perintah `kubectl expose --type-LoadBalancer` digunakan untuk ekspos Service keluar dari Cluster. jalankan perintah `kubectl expose deployment luk-flask --type=LoadBalancer --port=5000` 
 <pre>
 $ kubectl expose deployment luk-flask --type=LoadBalancer --port=5000
-service/python-flask exposed
+service/luk-flask exposed
 </pre>  
 2. Melihat Service yang di buat tadi dengan perintah `kubectl get services`  
 <pre>
