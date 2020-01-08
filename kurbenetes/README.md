@@ -29,7 +29,7 @@ Secara logis, setiap kontroler adalah sebuah proses yang berbeda, tetapi untuk m
 * Kontroler Endpoints : Menginisiasi objek Endpoints (yang merupakan gabungan Pods dan Services).
 * Kontroler Service Account & Token: Membuat akun dan akses token API standar untuk setiap namespaces yang dibuat.
 
-# Membuat sebuah Deployment menggunakan Python+Flask
+# Membuat sebuah Deployment menggunakan Python
 
 1. Membuat Docker images terlebih dahulu`lukmansl1994/imageuas:v1`
 <pre>
